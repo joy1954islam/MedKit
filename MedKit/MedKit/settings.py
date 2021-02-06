@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/3.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
-
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'accounts.apps.AccountsConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -54,7 +55,7 @@ ROOT_URLCONF = 'MedKit.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -118,3 +119,60 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
+
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),
+]
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+MAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER ='joyislam1954@gmail.com'
+EMAIL_HOST_PASSWORD =''
+
+ENABLE_USER_ACTIVATION = True
+DISABLE_USERNAME = False
+LOGIN_VIA_EMAIL = True
+LOGIN_VIA_EMAIL_OR_USERNAME = False
+LOGIN_REDIRECT_URL = 'home'
+LOGIN_URL = 'log_in'
+LOGOUT_URL = 'log_out'
+USE_REMEMBER_ME = True
+
+RESTORE_PASSWORD_VIA_EMAIL_OR_USERNAME = False
+ENABLE_ACTIVATION_AFTER_EMAIL_CHANGE = True
+
+SIGN_UP_FIELDS = ['username', 'first_name', 'last_name', 'email', 'password1', 'password2']
+if DISABLE_USERNAME:
+    SIGN_UP_FIELDS = ['first_name', 'last_name', 'email', 'password1', 'password2']
+
+MESSAGE_STORAGE = 'django.contrib.messages.storage.cookie.CookieStorage'
+
+USE_I18N = True
+USE_L10N = True
+LANGUAGE_CODE = 'en'
+
+
+TIME_ZONE = 'Asia/Dhaka'
+USE_TZ = True
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
+
+
+from django.contrib.messages import constants as messages
+
+MESSAGE_TAGS = {
+    messages.DEBUG: 'alert-info',
+    messages.INFO: 'alert-info',
+    messages.SUCCESS: 'alert-success',
+    messages.WARNING: 'alert-warning',
+    messages.ERROR: 'alert-danger',
+}
+AUTH_USER_MODEL = 'accounts.User'
+
+import os
+print (os.getcwd())
