@@ -8,34 +8,21 @@
     <section class="service">
         <div class="container">
             <div class="service-header">
-                <h6>Worker</h6>
-                <p>There are a lots of experience worker for you</p>
+                <h6>Doctor</h6>
+                <p>There are a lots of experience Doctor for you</p>
             </div>
             <div class="ser-row">
+               {% for doctor in doctor %}
+                    {% if doctor.is_doctor == True and doctor.is_active == True %}
                 <div class="contain col-lg-3">
-                    <img class="rounded-circle" src="images/1.png" alt="">
-                    <h5>Worker name</h5>
-                    <h6>work title</h6>
-                    <button type="button">Details</button>
+                    <img class="rounded-circle" src="{{ doctor.image.url }}" alt="">
+                    <h5>{{ doctor.username }}</h5>
+                    <h6>{{ doctor.email }}</h6>
+                    <a btn="btn btn-primary" href="" type="button">Details</a>
                 </div>
-                <div class="contain col-lg-3">
-                    <img class="rounded-circle" src="images/1.png" alt="">
-                    <h5>Worker name</h5>
-                    <h6>work title</h6>
-                    <button type="button">Details</button>
-                </div>
-                <div class="contain col-lg-3">
-                    <img class="rounded-circle" src="images/1.png" alt="">
-                    <h5>Worker name</h5>
-                    <h6>work title</h6>
-                    <button type="button">Details</button>
-                </div>
-                <div class="contain col-lg-3">
-                    <img class="rounded-circle" src="images/1.png" alt="">
-                    <h5>Worker name</h5>
-                    <h6>work title</h6>
-                    <button type="button">Details</button>
-                </div>
+                 {% endif%}
+                    {% endfor%}
+
                 <div class="btn float-right">
                     <button type="button">see all..</button>
                 </div>

@@ -3,15 +3,22 @@
       <tr>
           <td>{{ employee.id }}</td>
           <td>{{ employee.username}}</td>
-          <td>{{ employee.first_name }}</td>
-          <td>{{ employee.last_name }}</td>
-          <td>{{ employee.email }}</td>
           <td>
-              {{ employee.MinistryName}}
+              {% for group in employee.category.all %}
+                     {{ group.name }}<br>
+               {% endfor%}
+          </td>
+          <td>
+              {% for group in employee.degree.all %}
+                     {{ group.degree }}<br>
+               {% endfor%}
+          </td>
+          <td>{{ employee.email }}</td>
+<!--          <td>-->
 <!--              {% for group in employee.MinistryName.all %}-->
 <!--                     {{ group.MinistryName }}<br>-->
 <!--               {% endfor%}-->
-          </td>
+<!--          </td>-->
           <td style="width: 150px">
               <a href="{% url 'doctor_update' employee.id %}" type="button" class="btn btn-success btn-sm">
                 <span class="glyphicon glyphicon-pencil"></span>

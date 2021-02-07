@@ -33,7 +33,7 @@ from .forms import (
     RestorePasswordForm, RestorePasswordViaEmailOrUsernameForm, RemindUsernameForm,
     ResendActivationCodeForm, ResendActivationCodeViaEmailForm, ChangeProfileForm, ChangeEmailForm
 )
-from .models import Activation
+from .models import Activation, User
 from django.views.generic import TemplateView
 
 
@@ -41,16 +41,30 @@ def home(request):
     if request.user.is_authenticated:
         if request.user.is_superuser:
             return redirect('ReceptionistHome')
-        elif request.user.is_governmentEmployee:
+        elif request.user.is_doctor:
             return redirect('')
-        elif request.user.is_trainer:
-            return redirect('')
+        elif request.user.is_patient:
+            return redirect('index')
 
     return HttpResponse("login failed")
 
 
+def doctor_home_page(request):
+    doctor = User.objects.all().filter(is_doctor=True)
+
+    context = {
+        'doctor': doctor,
+    }
+    return render(request,'doctor.html',context)
+
+
 def index_page(request):
-    return render(request,'index.html')
+    doctor = User.objects.all().filter(is_doctor=True)[0:4]
+
+    context = {
+        'doctor': doctor,
+    }
+    return render(request,'index.html',context)
 
 
 class ChangeLanguageView(TemplateView):
@@ -120,7 +134,7 @@ class SignUpView(GuestOnlyView, FormView):
     form_class = SignUpForm
 
     def get_context_data(self, **kwargs):
-        kwargs['user_type'] = 'student'
+        kwargs['user_type'] = 'patient'
         return super().get_context_data(**kwargs)
 
     def form_valid(self, form):

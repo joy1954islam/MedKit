@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="{% static 'css/all.min.css' %}">
     <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
-    <title>home</title>
+    <title>MedKit</title>
 </head>
 <body>
     <!-- preheader section html start -->
@@ -36,11 +36,18 @@
             <div class="manu-bar">
                 <ul>
                     <li><a href="{% url 'index' %}">Home</a></li>
-                    <li><a href="#">Doctor</a></li>
+                    <li><a href="{% url 'doctors_list' %}">Doctor</a></li>
                     <li><a href="#">Job Post</a></li>
-                    <li><a href="{% url 'log_in' %}">Login</a></li>
-                    <li><a href="{% url 'sign_up' %}">Sign up</a></li>
-
+                    {% if user.is_authenticated and user.is_staff %}
+                        <li><a href="{% url 'ReceptionistHome' %}"><span class="glyphicon glyphicon-log-in"></span> Dashboard</a></li>
+                        <li><a href="{% url 'log_out' %}"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+                    {% elif user.is_authenticated and user.is_patient %}
+                        <li><a href="{% url 'ReceptionistHome' %}"><span class="glyphicon glyphicon-log-in"></span> Dashboard</a></li>
+                        <li><a href="{% url 'log_out' %}"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+                    {% else %}
+                         <li><a href="{% url 'log_in' %}">Log In</a></li>
+                         <li><a href="{% url 'sign_up' %}">Sign Up</a></li>
+                    {% endif %}
                 </ul>
             </div>
         </div>

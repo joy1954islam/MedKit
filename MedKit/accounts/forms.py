@@ -141,7 +141,7 @@ class SignUpForm(UserCreationForm):
     @transaction.atomic
     def save(self, commit=True):
         user = super().save(commit=False)
-        user.is_student = True
+        user.is_patient = True
         # if commit:
         user.save()
         # student = Student.objects.create(user=user)

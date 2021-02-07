@@ -24,20 +24,20 @@ class DegreeForm(forms.ModelForm):
 
 
 class DoctorForm(UserCreationForm):
-    category = forms.ModelMultipleChoiceField(
-        queryset=Category.objects.all(),
-        widget=forms.CheckboxSelectMultiple,
-        required=True
-    )
-    degree = forms.ModelMultipleChoiceField(
-        queryset=Degree.objects.all(),
-        widget=forms.CheckboxSelectMultiple,
-        required=True
-    )
+    # category = forms.ModelMultipleChoiceField(
+    #     queryset=Category.objects.all(),
+    #     widget=forms.CheckboxSelectMultiple,
+    #     required=True
+    # )
+    # degree = forms.ModelMultipleChoiceField(
+    #     queryset=Degree.objects.all(),
+    #     widget=forms.CheckboxSelectMultiple,
+    #     required=True
+    # )
 
     class Meta:
         model = User
-        fields = ['username', 'category', 'degree', 'email', 'password1', 'password2']
+        fields = ['username', 'email', 'password1', 'password2']
 
     email = forms.EmailField(label=_('Email'), help_text=_('Required. Enter an existing email address.'))
 
@@ -46,6 +46,7 @@ class DoctorForm(UserCreationForm):
         user.is_doctor = True
         if commit:
             user.save()
+
         return user
 
     def clean_email(self):
@@ -72,5 +73,5 @@ class DoctorSignUpUpdateForm(forms.ModelForm):
 
     class Meta:
         model = User
-        fields = ['username', 'category', 'degree', 'email',]
+        fields = ['username', 'category', 'degree',]
 

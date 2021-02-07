@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<br><br><br><br><br>
+<section class="service">
+        <div class="container">
+            <div class="service-header">
+                <h6>Doctor</h6>
+                <p>There are a lots of experience Doctor for you</p>
+            </div>
+            <div class="ser-row">
+               {% for doctor in doctor %}
+                    {% if doctor.is_doctor == True and doctor.is_active == True %}
+                <div class="contain col-lg-3">
+                    <img class="rounded-circle" src="{{ doctor.image.url }}" alt="">
+                    <h5>{{ doctor.username }}</h5>
+                    <h6>{{ doctor.email }}</h6>
+                    <a btn="btn btn-primary" href="" type="button">Details</a>
+                </div>
+                 {% endif%}
+                    {% endfor%}
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </section>   <br><br>
+    <hr>
+{% endblock content %}
