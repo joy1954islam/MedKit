@@ -25,4 +25,7 @@ urlpatterns = [
     path('degree/update/<int:pk>/', views.update_degree, name='update_degree'),
     path('degree/delete/<int:pk>/', views.delete_degree.as_view(), name='delete_degree'),
 
+
+    path('patient/', views.patient_list, name='patient_list'),
+
 ]

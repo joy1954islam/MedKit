@@ -67,6 +67,14 @@ def index_page(request):
     return render(request,'index.html',context)
 
 
+def DoctorProfileSingle(request,pk):
+    profile = User.objects.filter(pk=pk)
+    context = {
+        'profile': profile,
+    }
+    return render(request,'single_doctor_profile_list.html',context)
+
+
 class ChangeLanguageView(TemplateView):
     template_name = 'change_language.html'
 

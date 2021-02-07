@@ -18,7 +18,7 @@
                     <img class="rounded-circle" src="{{ doctor.image.url }}" alt="">
                     <h5>{{ doctor.username }}</h5>
                     <h6>{{ doctor.email }}</h6>
-                    <a btn="btn btn-primary" href="" type="button">Details</a>
+                    <a btn="btn btn-primary" href="{% url 'DoctorProfileSingle' doctor.pk %}" type="button">Details</a>
                 </div>
                  {% endif%}
                     {% endfor%}

@@ -26,6 +26,7 @@ urlpatterns = [
     path('Receptionist/',include('Receptionist.urls')),
 
     path('home/', account_views.home, name='home'),
+    path('doctor/<int:pk>/',account_views.DoctorProfileSingle,name='DoctorProfileSingle')
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

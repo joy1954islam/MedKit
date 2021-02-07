@@ -1,10 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-
-</body>
-</html>
+{% for patient in patient %}
+  {% if patient.is_patient and patient.is_active %}
+      <tr>
+          <td>{{ patient.id }}</td>
+          <td>{{ patient.username}}</td>
+          <td>
+              {{ patient.first_name }}<br>
+          </td>
+          <td>
+              {{ patient.last_name }}<br>
+          </td>
+          <td>{{ patient.email }}</td>
+      </tr>
+  {% endif%}
+        {% empty %}
+          <tr>
+            <td colspan="8" class="text-center bg-warning">No employee</td>
+          </tr>
+{% endfor %}

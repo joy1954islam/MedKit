@@ -9,16 +9,6 @@
 {% block content %}
 <br>
 
-
- <p>
-     <a href="{% url 'doctor_create' %}" type="button" style="float:right;" class="btn btn-primary">
-         <span class="glyphicon glyphicon-plus"></span>
-            Create a Doctor
-     </a>
-
-  </p>
-
-
 <div class="col-md-12 col-sm-12 ">
     <div class="x_panel">
         <div class="x_title">
@@ -63,15 +53,15 @@
                                 <tr>
                                     <th>Id</th>
                                     <th>UserName</th>
-                                    <th>Category </th>
-                                    <th>Degree </th>
+                                    <th>First Name </th>
+                                    <th>Last Name </th>
                                     <th>Email</th>
-                                    <th></th>
+
 
                                 </tr>
                             </thead>
                             <tbody>
-                                    {% include 'Receptionist/Doctor/partial_doctor_list.html' %}
+                                    {% include 'Receptionist/Patient/partial_patient_list.html' %}
                             </tbody>
                         </table>
                     </div>

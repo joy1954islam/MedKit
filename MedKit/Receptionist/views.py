@@ -277,3 +277,15 @@ class delete_degree(DeleteView):
     model = Degree
     template_name = 'Receptionist/Degree//degree_delete.html'
     success_url = 'http://127.0.0.1:8000/Receptionist/degree/list/'
+
+
+def patient_list(request):
+    patient = User.objects.all()
+    # MyFilter = GovtUserFilter(request.GET,queryset=employees)
+    # employees = MyFilter.qs
+    context = {
+        'patient': patient,
+        # 'MyFilter':MyFilter,
+    }
+    return render(request, 'Receptionist/Patient/patient_list.html', context)
+

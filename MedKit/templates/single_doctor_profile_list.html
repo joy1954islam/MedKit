@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block content %}
+
+<br>
+<br>
+<br>
+<br>
+           {% for doctor in profile %}
+            <div class="profile-header clearfix">
+               <div class="float-left">
+                    <img src="{{ doctor.image.url }}" alt="">
+               </div>
+               <div class="text float-left">
+                    <h4>{{ doctor.username }}</h4>
+                    <h3>{{ doctor.email }}</h3><hr>
+                    <h3>
+                       <h1>Category <br></h1><hr>
+                        {% for group in doctor.category.all %}
+                            {{ group.name }}<br>
+                        {% endfor%}
+                    </h3>
+                    <h2>
+                        <h1>Degree <br></h1><hr>
+                        {% for group in doctor.degree.all %}
+                             {{ group.degree }}<br>
+                        {% endfor%}
+                    </h2>
+                    <span>Check Up Price : 500 Taka</span>
+               </div>
+            </div>
+            <div class="profile-body clearfix">
+                <hr>
+                <div class="left-panel col-lg-6 float-left">
+                    <span class="text">Location: </span>
+                    <span class="text-1">{{ doctor.profile.Address }}</span><br>
+                    {% if user.is_authenticated and user.is_patient  %}
+                    <span class="text">Phone: </span>
+                    <span class="text-1">{{ doctor.phone_number }}</span>
+                    {% endif %}
+                    <br>
+
+                </div>
+            </div>
+           {% endfor %}
+{% endblock content %}
