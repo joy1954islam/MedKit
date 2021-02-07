@@ -13,8 +13,10 @@
                     <img src="{{ doctor.image.url }}" alt="">
                </div>
                <div class="text float-left">
-                    <h4>{{ doctor.username }}</h4>
-                    <h3>{{ doctor.email }}</h3><hr>
+                    <h4>User Name : {{ doctor.username }} </h4>
+                    <h4>Name : {{ doctor.first_name }} {{ doctor.last_name }}</h4>
+                    <h3>Email : {{ doctor.email }}</h3>
+                   <hr>
                     <h3>
                        <h1>Category <br></h1><hr>
                         {% for group in doctor.category.all %}
@@ -27,7 +29,9 @@
                              {{ group.degree }}<br>
                         {% endfor%}
                     </h2>
-                    <span>Check Up Price : 500 Taka</span>
+                   <br>
+                   <hr>
+                   <h1>Check Up Price : 500 Taka</h1>
                </div>
             </div>
             <div class="profile-body clearfix">
@@ -35,9 +39,11 @@
                 <div class="left-panel col-lg-6 float-left">
                     <span class="text">Location: </span>
                     <span class="text-1">{{ doctor.profile.Address }}</span><br>
-                    {% if user.is_authenticated and user.is_patient  %}
+                    {% if user.is_authenticated  %}
                     <span class="text">Phone: </span>
                     <span class="text-1">{{ doctor.phone_number }}</span>
+                    <br>
+                    <a href=""  class="btn btn-success" type="button">Take Appointment</a>
                     {% endif %}
                     <br>
 

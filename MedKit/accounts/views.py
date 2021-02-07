@@ -42,7 +42,7 @@ def home(request):
         if request.user.is_superuser:
             return redirect('ReceptionistHome')
         elif request.user.is_doctor:
-            return redirect('')
+            return redirect('index')
         elif request.user.is_patient:
             return redirect('index')
 

@@ -14,11 +14,6 @@
                {% endfor%}
           </td>
           <td>{{ employee.email }}</td>
-<!--          <td>-->
-<!--              {% for group in employee.MinistryName.all %}-->
-<!--                     {{ group.MinistryName }}<br>-->
-<!--               {% endfor%}-->
-<!--          </td>-->
           <td style="width: 150px">
               <a href="{% url 'doctor_update' employee.id %}" type="button" class="btn btn-success btn-sm">
                 <span class="glyphicon glyphicon-pencil"></span>

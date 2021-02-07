@@ -18,13 +18,13 @@
                     <img class="rounded-circle" src="{{ doctor.image.url }}" alt="">
                     <h5>{{ doctor.username }}</h5>
                     <h6>{{ doctor.email }}</h6>
-                    <a btn="btn btn-primary" href="{% url 'DoctorProfileSingle' doctor.pk %}" type="button">Details</a>
+                    <a href="{% url 'DoctorProfileSingle' doctor.pk %}" class="btn btn-primary"  type="button" >Details</a>
                 </div>
                  {% endif%}
                     {% endfor%}
 
                 <div class="btn float-right">
-                    <button type="button">see all..</button>
+                    <a href="{% url 'doctors_list' %}" class="btn btn-info">See all...</a>
                 </div>
             </div>
         </div>

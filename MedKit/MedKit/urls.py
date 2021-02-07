@@ -24,6 +24,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('',include('accounts.urls')),
     path('Receptionist/',include('Receptionist.urls')),
+    path('Doctor/',include('Doctor.urls')),
+    path('Patient/',include('Patient.urls')),
 
     path('home/', account_views.home, name='home'),
     path('doctor/<int:pk>/',account_views.DoctorProfileSingle,name='DoctorProfileSingle')
