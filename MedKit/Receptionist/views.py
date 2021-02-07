@@ -23,12 +23,15 @@ from django.contrib.auth.views import (
 )
 
 from django.contrib.auth import get_user_model
-User = get_user_model()
 
+from .forms import DoctorForm,DoctorSignUpUpdateForm
+
+User = get_user_model()
 
 
 def SuperAdminHome(request):
     return render(request,'Receptionist/Home.html')
+
 
 def SuperAdminProfile(request):
     if request.method == 'POST':
@@ -43,11 +46,11 @@ def SuperAdminProfile(request):
     context = {
         'u_form': u_form
     }
-    return render(request, 'SuperAdmin/Profile/SuperAdminProfile.html', context)
+    return render(request, 'Receptionist/Profile/SuperAdminProfile.html', context)
 
 
 class ChangeEmailView(LoginRequiredMixin, FormView):
-    template_name = 'SuperAdmin/Profile/change_email.html'
+    template_name = 'Receptionist/Profile/change_email.html'
     form_class = ChangeEmailForm
 
     def get_form_kwargs(self):
@@ -100,11 +103,11 @@ class ChangeEmailActivateView(View):
 
         messages.success(request, f'You have successfully changed your email!')
 
-        return redirect('SuperAdmin_change_email    ')
+        return redirect('SuperAdmin_change_email')
 
 
 class ChangePasswordView(BasePasswordChangeView):
-    template_name = 'SuperAdmin/Profile/change_password.html'
+    template_name = 'Receptionist/Profile/change_password.html'
 
     def form_valid(self, form):
         # Change the password
@@ -116,3 +119,97 @@ class ChangePasswordView(BasePasswordChangeView):
         messages.success(self.request, f'Your password was changed.')
 
         return redirect('log_in')
+
+
+class DoctorSignUpView(FormView):
+    template_name = 'Receptionist/Doctor/partial_doctor_create.html'
+    form_class = DoctorForm
+
+    def form_valid(self, form):
+        request = self.request
+        user = form.save(commit=False)
+
+        if settings.DISABLE_USERNAME:
+            # Set a temporary username
+            user.username = get_random_string()
+        else:
+            user.username = form.cleaned_data['username']
+
+        if settings.ENABLE_USER_ACTIVATION:
+            user.is_active = False
+
+        # Create a user record
+        user.save()
+
+        # Change the username to the "user_ID" form
+        if settings.DISABLE_USERNAME:
+            user.username = f'user_{user.id}'
+            user.save()
+
+        if settings.ENABLE_USER_ACTIVATION:
+            code = get_random_string(20)
+
+            act = Activation()
+            act.code = code
+            act.user = user
+            act.save()
+
+            send_activation_email(request,user.email, code)
+
+            messages.success(request,f'Account is Created and You are signed up. To activate the account, follow the '
+                                     f'link sent to the mail.')
+        else:
+            raw_password = form.cleaned_data['password1']
+
+            user = authenticate(username=user.username, password=raw_password)
+            login(request, user)
+            messages.success(request,f'You are successfully signed up!')
+
+        return redirect('doctor_list')
+
+
+def doctor_list(request):
+    employees = User.objects.all()
+    # MyFilter = GovtUserFilter(request.GET,queryset=employees)
+    # employees = MyFilter.qs
+    context = {
+        'employees': employees,
+        # 'MyFilter':MyFilter,
+    }
+    return render(request, 'Receptionist/Doctor/doctor_list.html', context)
+
+
+def doctor_update(request,pk):
+    course = get_object_or_404(User, pk=pk)
+    form = DoctorSignUpUpdateForm(request.POST or None, request.FILES or None, instance=course)
+    if form.is_valid():
+        form.save()
+        messages.success(request, "User Updated Successfully")
+        return redirect("employee_list")
+    # else:
+    #     messages.error(request, "Training Not Updated Successfully")
+    return render(request, 'Receptionist/Doctor/partial_doctor_update.html', {'form': form})
+
+
+def doctor_delete(request, pk):
+    employee = get_object_or_404(User, pk=pk)
+    data = dict()
+    if request.method == 'POST':
+        employee.delete()
+        data['form_is_valid'] = True
+        employees = User.objects.all()
+        data['html_employee_list'] = render_to_string('Receptionist/Doctor/partial_doctor_list.html',
+                                                      {'employees': employees })
+    else:
+        context = {'employee': employee}
+        data['html_form'] = render_to_string('Receptionist/Doctor/partial_doctor_delete.html', context, request=request)
+    return JsonResponse(data)
+
+
+def doctor_view(request, pk):
+    employee = get_object_or_404(User, pk=pk)
+    data = dict()
+    context = {'employee': employee}
+    data['html_form'] = render_to_string('Receptionist/Doctor/partial_doctor_view.html', context, request=request)
+    return JsonResponse(data)
+
