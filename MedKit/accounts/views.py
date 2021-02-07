@@ -40,7 +40,7 @@ from django.views.generic import TemplateView
 def home(request):
     if request.user.is_authenticated:
         if request.user.is_superuser:
-            return redirect('')
+            return redirect('ReceptionistHome')
         elif request.user.is_governmentEmployee:
             return redirect('')
         elif request.user.is_trainer:
