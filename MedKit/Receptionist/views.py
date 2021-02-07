@@ -186,7 +186,7 @@ def doctor_update(request,pk):
     if form.is_valid():
         form.save()
         messages.success(request, "User Updated Successfully")
-        return redirect("employee_list")
+        return redirect("doctor_list")
     # else:
     #     messages.error(request, "Training Not Updated Successfully")
     return render(request, 'Receptionist/Doctor/partial_doctor_update.html', {'form': form})
@@ -244,4 +244,36 @@ def update_category(request, pk):
 class delete_category(DeleteView):
     model = Category
     template_name = 'Receptionist/Category//category_delete.html'
-    success_url = 'list_category'
+    success_url = 'http://127.0.0.1:8000/Receptionist/category/list/'
+
+
+def list_degree(request):
+    degree = Degree.objects.all()
+    return render(request,'Receptionist/Degree/degree_list.html',{'degree': degree})
+
+
+def create_degree(request):
+    form = DegreeForm()
+    if request.method == 'POST':
+        form = DegreeForm(request.POST or None)
+        if form.is_valid():
+            form.save()
+            return redirect('list_degree')
+    return render(request, 'Receptionist/Degree/degree_create.html', {'form': form})
+
+
+def update_degree(request, pk):
+    degree = get_object_or_404(Degree, pk=pk)
+    form = DegreeForm(instance=degree)
+    if request.method == 'POST':
+        form = DegreeForm(request.POST, instance=degree)
+        if form.is_valid():
+            form.save()
+            return redirect('list_degree')
+    return render(request, 'Receptionist/Degree/degree_update.html', {'form': form})
+
+
+class delete_degree(DeleteView):
+    model = Degree
+    template_name = 'Receptionist/Degree//degree_delete.html'
+    success_url = 'http://127.0.0.1:8000/Receptionist/degree/list/'

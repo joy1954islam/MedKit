@@ -20,4 +20,9 @@ urlpatterns = [
     path('category/update/<int:pk>/', views.update_category, name='update_category'),
     path('category/delete/<int:pk>/', views.delete_category.as_view(), name='delete_category'),
 
+    path('degree/list/', views.list_degree, name='list_degree'),
+    path('degree/create/', views.create_degree, name='create_degree'),
+    path('degree/update/<int:pk>/', views.update_degree, name='update_degree'),
+    path('degree/delete/<int:pk>/', views.delete_degree.as_view(), name='delete_degree'),
+
 ]

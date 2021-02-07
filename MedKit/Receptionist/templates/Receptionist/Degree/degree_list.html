@@ -11,9 +11,9 @@
 
 
  <p>
-     <a href="{% url 'create_category' %}" type="button" style="float:right;" class="btn btn-primary">
+     <a href="{% url 'create_degree' %}" type="button" style="float:right;" class="btn btn-primary">
          <span class="glyphicon glyphicon-plus"></span>
-            Create a Category
+            Create a Degree
      </a>
 
   </p>
@@ -62,19 +62,19 @@
                             <thead>
                                 <tr>
                                     <th>Id</th>
-                                    <th>Category Name </th>
+                                    <th>Degree Name </th>
                                     <th></th>
 
                                 </tr>
                             </thead>
                             <tbody>
-                                 {% for category in category %}
+                                 {% for degree in degree %}
                                     <tr>
-                                      <th scope="row">{{ category.id}}</th>
-                                      <td>{{ category.name }}</td>
+                                      <th scope="row">{{ degree.id }}</th>
+                                      <td>{{ degree.degree }}</td>
                                       <td>
-                                          <a href="{% url 'update_category' category.id %}" class="btn btn-success"> Edit</a>
-                                          <a href="{% url 'delete_category' category.id %}" class="btn btn-danger"> Delete</a>
+                                          <a href="{% url 'update_degree' degree.id %}" class="btn btn-success"> Edit</a>
+                                          <a href="{% url 'delete_degree' degree.id %}" class="btn btn-danger"> Delete</a>
                                       </td>
 
                                     </tr>
