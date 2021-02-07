@@ -1,0 +1,52 @@
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/all.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <title>home</title>
+</head>
+<body>
+    <!-- preheader section html start -->
+    <section class="pre-header">
+        <div class="container">
+            <div class="header-row">
+                <div class="left-icon">
+
+                </div>
+                <div class="right-icon">
+                    <i class="fas fa-envelope-square">medkit@gmail.com</i>
+                    <i class="fab fa-facebook-square"></i>
+                    <i class="fab fa-whatsapp"></i>
+                    <i class="fab fa-instagram"></i>
+                    <i class="fab fa-twitter-square"></i>
+                    <i class="fab fa-linkedin-in"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--header section html part start-->
+    <section class="header">
+        <div class="container">
+            <div class="logo">
+                <a href="{% url 'index' %}">MedKit</a>
+            </div>
+            <div class="manu-bar">
+                <ul>
+                    <li><a href="{% url 'index' %}">Home</a></li>
+                    <li><a href="#">Doctor</a></li>
+                    <li><a href="#">Job Post</a></li>
+                    <li><a href="#">Login</a></li>
+                    <li><a href="#">Sign up</a></li>
+
+                </ul>
+            </div>
+        </div>
+    </section>
+    <div class="container">
+        {% block content %}
+        {% endblock content %}
+    </div>
+</body>
