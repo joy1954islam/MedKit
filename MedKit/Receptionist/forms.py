@@ -6,7 +6,21 @@ from django.forms import ValidationError
 from django.utils.translation import gettext_lazy as _
 from django.contrib.auth import get_user_model
 
+from .models import Category,Degree
+
 User = get_user_model()
+
+
+class CategoryForm(forms.ModelForm):
+    class Meta:
+        model = Category
+        fields = ['name']
+
+
+class DegreeForm(forms.ModelForm):
+    class Meta:
+        model = Degree
+        fields = ['degree']
 
 
 class DoctorForm(UserCreationForm):

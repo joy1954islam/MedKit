@@ -8,7 +8,7 @@ from django.template.loader import render_to_string
 
 from django.shortcuts import render
 from accounts.forms import UserUpdateForm, ChangeEmailForm
-from django.views.generic import View, FormView
+from django.views.generic import View, FormView, DeleteView
 from django.conf import settings
 from django.utils.crypto import get_random_string
 from accounts.models import Activation
@@ -24,7 +24,8 @@ from django.contrib.auth.views import (
 
 from django.contrib.auth import get_user_model
 
-from .forms import DoctorForm,DoctorSignUpUpdateForm
+from .forms import DoctorForm,DoctorSignUpUpdateForm,CategoryForm,DegreeForm
+from .models import Category,Degree
 
 User = get_user_model()
 
@@ -213,3 +214,34 @@ def doctor_view(request, pk):
     data['html_form'] = render_to_string('Receptionist/Doctor/partial_doctor_view.html', context, request=request)
     return JsonResponse(data)
 
+
+def list_category(request):
+    category = Category.objects.all()
+    return render(request,'Receptionist/Category/category_list.html',{'category': category})
+
+
+def create_category(request):
+    form = CategoryForm()
+    if request.method == 'POST':
+        form = CategoryForm(request.POST or None)
+        if form.is_valid():
+            form.save()
+            return redirect('list_category')
+    return render(request, 'Receptionist/Category/category_create.html', {'form': form})
+
+
+def update_category(request, pk):
+    category = get_object_or_404(Category, pk=pk)
+    form = CategoryForm(instance=category)
+    if request.method == 'POST':
+        form = CategoryForm(request.POST, instance=category)
+        if form.is_valid():
+            form.save()
+            return redirect('list_category')
+    return render(request, 'Receptionist/Category/category_update.html', {'form': form})
+
+
+class delete_category(DeleteView):
+    model = Category
+    template_name = 'Receptionist/Category//category_delete.html'
+    success_url = 'list_category'

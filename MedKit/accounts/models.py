@@ -4,6 +4,8 @@ from django.contrib.auth.models import AbstractUser
 from PIL import Image
 from django.contrib.auth.models import User
 
+from Receptionist.models import Category,Degree
+
 
 class Activation(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
@@ -14,6 +16,8 @@ class Activation(models.Model):
 
 class User(AbstractUser):
     owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE,null=True,blank=True)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE,null=True,blank=True)
+    degree = models.ForeignKey(Degree, on_delete=models.CASCADE,null=True,blank=True)
     is_doctor = models.BooleanField(default=False)
     is_patient = models.BooleanField(default=False)
     phone_number = models.CharField(max_length=12, null=True, blank=True)

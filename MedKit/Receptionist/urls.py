@@ -14,4 +14,10 @@ urlpatterns = [
     path('<int:pk>/doctor/update/', views.doctor_update, name='doctor_update'),
     path('<int:pk>/doctor/delete/', views.doctor_delete, name='doctor_delete'),
     path('<int:pk>/doctor/view/', views.doctor_view, name='doctor_view'),
+
+    path('category/list/', views.list_category, name='list_category'),
+    path('category/create/', views.create_category, name='create_category'),
+    path('category/update/<int:pk>/', views.update_category, name='update_category'),
+    path('category/delete/<int:pk>/', views.delete_category.as_view(), name='delete_category'),
+
 ]
