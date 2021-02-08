@@ -43,7 +43,7 @@
                     <span class="text">Phone: </span>
                     <span class="text-1">{{ doctor.phone_number }}</span>
                     <br>
-                    <a href=""  class="btn btn-success" type="button">Take Appointment</a>
+                    <a href="{% url 'add_take_appointment' doctor.pk %}"  class="btn btn-success" type="button">Take Appointment</a>
                     {% endif %}
                     <br>
 

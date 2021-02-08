@@ -45,7 +45,7 @@
 
                     {% elif user.is_authenticated and user.is_doctor %}
 
-                        <li><a href="{% url 'ReceptionistHome' %}"><span class="glyphicon glyphicon-log-in"></span> View Appointment</a></li>
+                        <li><a href="{% url 'list_take_appointment' %}"><span class="glyphicon glyphicon-log-in"></span> View Appointment</a></li>
                         <li><a href="{% url 'DoctorProfile' %}"><span class="glyphicon glyphicon-log-in"></span> Profile </a></li>
                         <li><a href="{% url 'change_password' %}"><span class="glyphicon glyphicon-log-in"></span> Change Password</a></li>
                         <li><a href="{% url 'change_email' %}"><span class="glyphicon glyphicon-log-in"></span> Change Email</a></li>
@@ -53,7 +53,7 @@
 
                     {% elif user.is_authenticated and user.is_patient %}
 
-                        <li><a href="{% url 'ReceptionistHome' %}"><span class="glyphicon glyphicon-log-in"></span> View Applied Appointment</a></li>
+                        <li><a href="{% url 'list_take_appointment' %}"><span class="glyphicon glyphicon-log-in"></span> View Applied Appointment</a></li>
                         <li><a href="{% url 'PatientProfile' %}"><span class="glyphicon glyphicon-log-in"></span> Profile</a></li>
                         <li><a href="{% url 'change_email' %}"><span class="glyphicon glyphicon-log-in"></span> Change Email</a></li>
                         <li><a href="{% url 'change_password' %}"><span class="glyphicon glyphicon-log-in"></span> Change Password</a></li>
