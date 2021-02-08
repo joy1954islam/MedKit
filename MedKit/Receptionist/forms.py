@@ -7,7 +7,7 @@ from django.utils.translation import gettext_lazy as _
 from django.contrib.auth import get_user_model
 
 from .models import Category,Degree
-
+from Patient.models import Appointment
 User = get_user_model()
 
 
@@ -75,3 +75,10 @@ class DoctorSignUpUpdateForm(forms.ModelForm):
         model = User
         fields = ['username', 'category', 'degree',]
 
+
+class UpdateAppointmentForm(forms.ModelForm):
+    date = forms.DateField(label='Date', widget=forms.SelectDateWidget)
+
+    class Meta:
+        model = Appointment
+        fields = ['payment_status','meet_link','date','time']

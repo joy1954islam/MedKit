@@ -1,0 +1,19 @@
+{% extends 'Receptionist/ReceptionistNavbar.html' %}
+{% load widget_tweaks %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block javascript %}
+
+{% endblock javascript %}
+
+{% block content %}
+<form method="post">
+    {% csrf_token %}
+    <h1> Appointment Information Update</h1>
+    {{ form|crispy }}
+<br>
+    <input  class="btn btn-info" type="submit" value="Submit">
+
+    <a  class="btn btn-primary" href="{% url 'receptionist_list_take_appointment' %}">Back Appointment List</a>
+</form>
+{% endblock content %}

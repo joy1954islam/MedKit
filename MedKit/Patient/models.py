@@ -11,6 +11,14 @@ class Appointment(models.Model):
     TrxID = models.CharField(max_length=35,null=True,blank=True)
     amount = models.FloatField(max_length=10,null=True,blank=True)
     is_apply = models.BooleanField(default=False,null=True,blank=True)
+    Payment = (
+        ('Pending', 'Pending'),
+        ('Accept', 'Accept'),
+    )
+    payment_status = models.CharField(max_length=7, choices=Payment,default='Pending',null=True,blank=True)
+    meet_link = models.URLField(null=True,blank=True)
+    date = models.DateTimeField(null=True,blank=True)
+    time = models.CharField(max_length=10,null=True,blank=True)
     created = models.DateTimeField(auto_now=True)
     updated = models.DateTimeField(auto_now=True)
 

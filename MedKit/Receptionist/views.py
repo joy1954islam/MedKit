@@ -24,8 +24,9 @@ from django.contrib.auth.views import (
 
 from django.contrib.auth import get_user_model
 
-from .forms import DoctorForm,DoctorSignUpUpdateForm,CategoryForm,DegreeForm
+from .forms import DoctorForm,DoctorSignUpUpdateForm,CategoryForm,DegreeForm,UpdateAppointmentForm
 from .models import Category,Degree
+from Patient.models import Appointment
 
 User = get_user_model()
 
@@ -289,3 +290,28 @@ def patient_list(request):
     }
     return render(request, 'Receptionist/Patient/patient_list.html', context)
 
+
+def list_take_appointment(request):
+    appointment = Appointment.objects.all()
+    return render(request,'Receptionist/Appointment/appointment_list.html',{'appointment': appointment})
+
+
+def update_take_appointment(request,pk):
+    appointment = get_object_or_404(Appointment, pk=pk)
+    form = UpdateAppointmentForm(instance=appointment)
+    if request.method == 'POST':
+        form = UpdateAppointmentForm(request.POST or None, request.FILES or None, instance=appointment)
+        if form.is_valid():
+            form.save()
+            return redirect('person_change', pk=pk)
+    return render(request, 'Receptionist/Appointment/appointment_update.html', {'form': form})
+
+
+def view_take_appointment(request,pk):
+    appointment = get_object_or_404(Appointment, pk=pk)
+    return render(request, 'Receptionist/Appointment/appointment_view.html', {'appointment': appointment})
+
+
+def list_take_appointment_payment(request):
+    appointment = Appointment.objects.all()
+    return render(request,'Receptionist/Payment/payment_list.html',{'appointment': appointment})

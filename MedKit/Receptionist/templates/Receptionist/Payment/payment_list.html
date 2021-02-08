@@ -1,0 +1,104 @@
+{% extends 'Receptionist/ReceptionistNavbar.html' %}
+{% load widget_tweaks %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block javascript %}
+  <script src="{% static 'Receptionist/Doctor/doctor.js' %}"></script>
+{% endblock javascript %}
+
+{% block content %}
+<br>
+
+
+ <p>
+     <a href="{% url 'create_category' %}" type="button" style="float:right;" class="btn btn-primary">
+         <span class="glyphicon glyphicon-plus"></span>
+            Create a Category
+     </a>
+
+  </p>
+
+
+<div class="col-md-12 col-sm-12 ">
+    <div class="x_panel">
+        <div class="x_title">
+            <h2>Button Example <small>Users</small></h2>
+            <div class="clearfix"></div>
+        </div>
+        <div class="x_content">
+            <div class="row">
+                <form method="get">
+                      <div class="row">
+                        <div class="form-group col-sm-4 col-md-3">
+                          {{ MyFilter.form.username.label_tag }}
+                          {% render_field MyFilter.form.username class="form-control" %}
+                        </div>
+                        <div class="form-group col-sm-4 col-md-3">
+                          {{ MyFilter.form.first_name.label_tag }}
+                          {% render_field MyFilter.form.first_name class="form-control" %}
+                        </div>
+                        <div class="form-group col-sm-4 col-md-3">
+                          {{ MyFilter.form.last_name.label_tag }}
+                          {% render_field MyFilter.form.last_name class="form-control" %}
+                        </div>
+                        <div class="form-group col-sm-8 col-md-6">
+                          {{ MyFilter.form.MinistryName.label_tag }}
+                          <div>
+                            {% for choice in MyFilter.form.MinistryName %}
+                              <label class="checkbox-inline">
+                                {{ choice.tag }} {{ choice.choice_label }}
+                              </label>
+                            {% endfor %}
+                          </div>
+                        </div>
+                      </div>
+                      <button type="submit" class="btn btn-primary">
+                        <span class="glyphicon glyphicon-search"></span> Search
+                      </button>
+                </form>
+                <div class="col-sm-12">
+                    <div class="card-box table-responsive">
+                        <table class="table" id="datatable-buttons"  style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Doctor Name </th>
+                                    <th>Patient Name </th>
+                                    <th>Phone Number</th>
+                                    <th>Trx ID</th>
+                                    <th>Amount</th>
+                                    <th>Apply</th>
+                                    <th>Payment Status</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                  {% for appointment in appointment %}
+                                    <tr>
+                                      <th scope="row">{{ appointment.id}}</th>
+                                      <td>{{ appointment.doctor }}</td>
+                                      <td>{{ appointment.patient }}</td>
+                                      <td>{{ appointment.Number }}</td>
+                                      <td>{{ appointment.TrxID }}</td>
+                                      <td>{{ appointment.amount }}</td>
+                                      <td>{{ appointment.is_apply }}</td>
+                                      <td>{{ appointment.payment_status }}</td>
+                                    </tr>
+                                 {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="modal-employee">
+    <div class="modal-dialog">
+      <div class="modal-content">
+      </div>
+    </div>
+</div>
+
+
+{% endblock content %}
