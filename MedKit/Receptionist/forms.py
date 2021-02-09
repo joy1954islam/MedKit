@@ -24,11 +24,7 @@ class DegreeForm(forms.ModelForm):
 
 
 class DoctorForm(UserCreationForm):
-    # category = forms.ModelMultipleChoiceField(
-    #     queryset=Category.objects.all(),
-    #     widget=forms.CheckboxSelectMultiple,
-    #     required=True
-    # )
+
     # degree = forms.ModelMultipleChoiceField(
     #     queryset=Degree.objects.all(),
     #     widget=forms.CheckboxSelectMultiple,
@@ -44,8 +40,8 @@ class DoctorForm(UserCreationForm):
     def save(self, commit=True):
         user = super().save(commit=False)
         user.is_doctor = True
-        if commit:
-            user.save()
+
+        user.save()
 
         return user
 

@@ -4,6 +4,8 @@ from django.shortcuts import render, redirect
 # Create your views here.
 from accounts.forms import UserUpdateForm
 
+from Patient.models import Appointment
+
 
 def DoctorProfile(request):
     if request.method == 'POST':
@@ -19,3 +21,9 @@ def DoctorProfile(request):
         'u_form': u_form
     }
     return render(request, 'Doctor/DoctorProfile.html', context)
+
+
+
+def list_take_appointment(request):
+    appointment = Appointment.objects.all()
+    return render(request,'Doctor/Appointment/appointment_list.html', {'appointment': appointment})

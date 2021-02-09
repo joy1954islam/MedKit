@@ -141,6 +141,7 @@ class DoctorSignUpView(FormView):
             user.is_active = False
 
         # Create a user record
+        Appointment.objects.create(doctor=user)
         user.save()
 
         # Change the username to the "user_ID" form
@@ -303,12 +304,12 @@ def update_take_appointment(request,pk):
         form = UpdateAppointmentForm(request.POST or None, request.FILES or None, instance=appointment)
         if form.is_valid():
             form.save()
-            return redirect('person_change', pk=pk)
+            return redirect('receptionist_list_take_appointment')
     return render(request, 'Receptionist/Appointment/appointment_update.html', {'form': form})
 
 
 def view_take_appointment(request,pk):
-    appointment = get_object_or_404(Appointment, pk=pk)
+    appointment = Appointment.objects.filter(pk=pk)
     return render(request, 'Receptionist/Appointment/appointment_view.html', {'appointment': appointment})
 
 
