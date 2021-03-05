@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+<br><br><br><br><br><br><br>
+<h1>Patient view prescribe</h1>
+<hr>
+    {% for prescribe in prescribe %}
+
+        <h1>Doctor Name : {{ prescribe.doctor }}</h1>
+        <h1>Patient Name : {{ prescribe.patient }}</h1>
+        <h1>Phone Number : {{ prescribe.Number }}</h1>
+        <h1>Meet Up Link : {{ prescribe.meet_link }}</h1>
+        <h1>Test : {{ prescribe.test }}</h1>
+        <h1>prescribe : {{ prescribe.prescribe }}</h1>
+<br>
+     <a  class="btn btn-primary" href="{% url 'list_take_appointment' %}">Back Appointment List</a>
+    {% endfor %}
+
+{% endblock content %}

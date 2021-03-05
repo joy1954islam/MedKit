@@ -2,9 +2,7 @@
 {% load widget_tweaks %}
 {% load static %}
 {% load crispy_forms_tags %}
-{% block javascript %}
-  <script src="{% static 'Receptionist/Doctor/doctor.js' %}"></script>
-{% endblock javascript %}
+
 
 {% block content %}
 <br>
@@ -85,8 +83,12 @@
                                       <td>{{ appointment.is_apply }}</td>
                                       <td>{{ appointment.payment_status }}</td>
                                       <th>
-                                         <a href="{% url 'update_take_appointment' appointment.pk %}" class="btn btn-success">Create Meet Up</a>
-                                         <a href="{% url 'view_take_appointment' appointment.pk %}" class="btn btn-info">View</a>
+                                          {% if appointment.meet_link %}
+
+                                          {% else %}
+                                            <a href="{% url 'update_take_appointment' appointment.pk %}" class="btn btn-success">Create Meet Up</a>
+                                          {% endif %}
+                                         <a href="{% url 'view_take_appointment' appointment.pk %}" class="btn btn-info">View Details</a>
                                       </th>
                                     </tr>
                                  {% endfor %}

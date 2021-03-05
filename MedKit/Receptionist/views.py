@@ -141,7 +141,7 @@ class DoctorSignUpView(FormView):
             user.is_active = False
 
         # Create a user record
-        Appointment.objects.create(doctor=user)
+        # Appointment.objects.create(doctor=user)
         user.save()
 
         # Change the username to the "user_ID" form
@@ -219,7 +219,10 @@ def doctor_view(request, pk):
 
 def list_category(request):
     category = Category.objects.all()
-    return render(request,'Receptionist/Category/category_list.html',{'category': category})
+    context = {
+        'category': category
+    }
+    return render(request, 'Receptionist/Category/category_list.html', context=context)
 
 
 def create_category(request):
@@ -229,7 +232,10 @@ def create_category(request):
         if form.is_valid():
             form.save()
             return redirect('list_category')
-    return render(request, 'Receptionist/Category/category_create.html', {'form': form})
+    context = {
+        'form': form
+        }
+    return render(request, 'Receptionist/Category/category_create.html', context=context)
 
 
 def update_category(request, pk):
@@ -240,7 +246,10 @@ def update_category(request, pk):
         if form.is_valid():
             form.save()
             return redirect('list_category')
-    return render(request, 'Receptionist/Category/category_update.html', {'form': form})
+    context = {
+        'form': form
+        }
+    return render(request, 'Receptionist/Category/category_update.html', context=context)
 
 
 class delete_category(DeleteView):
@@ -251,7 +260,10 @@ class delete_category(DeleteView):
 
 def list_degree(request):
     degree = Degree.objects.all()
-    return render(request,'Receptionist/Degree/degree_list.html',{'degree': degree})
+    context = {
+        'degree': degree
+    }
+    return render(request, 'Receptionist/Degree/degree_list.html', context=context)
 
 
 def create_degree(request):
@@ -261,7 +273,10 @@ def create_degree(request):
         if form.is_valid():
             form.save()
             return redirect('list_degree')
-    return render(request, 'Receptionist/Degree/degree_create.html', {'form': form})
+    context = {
+        'form': form
+    }
+    return render(request, 'Receptionist/Degree/degree_create.html', context=context)
 
 
 def update_degree(request, pk):
@@ -272,7 +287,10 @@ def update_degree(request, pk):
         if form.is_valid():
             form.save()
             return redirect('list_degree')
-    return render(request, 'Receptionist/Degree/degree_update.html', {'form': form})
+    context = {
+        'form': form
+    }
+    return render(request, 'Receptionist/Degree/degree_update.html', context=context)
 
 
 class delete_degree(DeleteView):
@@ -289,15 +307,18 @@ def patient_list(request):
         'patient': patient,
         # 'MyFilter':MyFilter,
     }
-    return render(request, 'Receptionist/Patient/patient_list.html', context)
+    return render(request, 'Receptionist/Patient/patient_list.html', context=context)
 
 
 def list_take_appointment(request):
     appointment = Appointment.objects.all()
-    return render(request,'Receptionist/Appointment/appointment_list.html',{'appointment': appointment})
+    context = {
+        'appointment': appointment
+    }
+    return render(request, 'Receptionist/Appointment/appointment_list.html', context=context)
 
 
-def update_take_appointment(request,pk):
+def update_take_appointment(request, pk):
     appointment = get_object_or_404(Appointment, pk=pk)
     form = UpdateAppointmentForm(instance=appointment)
     if request.method == 'POST':
@@ -305,14 +326,23 @@ def update_take_appointment(request,pk):
         if form.is_valid():
             form.save()
             return redirect('receptionist_list_take_appointment')
-    return render(request, 'Receptionist/Appointment/appointment_update.html', {'form': form})
+    context = {
+        'form': form
+       }
+    return render(request, 'Receptionist/Appointment/appointment_update.html', context=context)
 
 
-def view_take_appointment(request,pk):
+def view_take_appointment(request, pk):
     appointment = Appointment.objects.filter(pk=pk)
-    return render(request, 'Receptionist/Appointment/appointment_view.html', {'appointment': appointment})
+    context = {
+        'appointment': appointment
+    }
+    return render(request, 'Receptionist/Appointment/appointment_view.html', context=context)
 
 
 def list_take_appointment_payment(request):
     appointment = Appointment.objects.all()
-    return render(request,'Receptionist/Payment/payment_list.html',{'appointment': appointment})
+    context = {
+        'appointment': appointment
+    }
+    return render(request, 'Receptionist/Payment/payment_list.html', context=context)

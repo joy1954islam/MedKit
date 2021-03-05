@@ -2,9 +2,7 @@
 {% load widget_tweaks %}
 {% load static %}
 {% load crispy_forms_tags %}
-{% block javascript %}
-  <script src="{% static 'Receptionist/Doctor/doctor.js' %}"></script>
-{% endblock javascript %}
+
 
 {% block content %}
 <br>
@@ -59,40 +57,47 @@
                                     <th>Meet Link</th>
                                     <th>Date</th>
                                     <th>Time</th>
+                                    <th></th>
+                                    <th></th>
 
 
                                 </tr>
                             </thead>
                             <tbody>
                                  {% for appointment in appointment %}
-                                    <tr>
-                                      <th scope="row">{{ appointment.id}}</th>
-                                      <td>{{ appointment.doctor }}</td>
-                                      <td>{{ appointment.patient }}</td>
-                                      <td>{{ appointment.Number }}</td>
-                                      <td>{{ appointment.TrxID }}</td>
-                                      <td>{{ appointment.amount }}</td>
-                                      <td>{{ appointment.is_apply }}</td>
-                                      <td>{{ appointment.payment_status }}</td>
-                                        <td>
-                                         <a href="{{ appointment.meet_link }}" target="_blank">{{ appointment.meet_link }}</a>
-                                      </td>
-                                        <td>
-                                            {{ appointment.date}}
-                                        </td>
-                                        <td>
-                                            {{ appointment.time }}
-                                        </td>
-                                        <td>
-                                            <a href="" class="btn btn-success">Create Prescribe</a>
-                                        </td>
-
-                                    </tr>
+                                     {% if request.user == appointment.patient %}
+                                        <tr>
+                                              <th scope="row">{{ appointment.id}}</th>
+                                              <td>{{ appointment.doctor }}</td>
+                                              <td>{{ appointment.patient }}</td>
+                                              <td>{{ appointment.Number }}</td>
+                                              <td>{{ appointment.TrxID }}</td>
+                                              <td>{{ appointment.amount }}</td>
+                                              <td>{{ appointment.is_apply }}</td>
+                                              <td>{{ appointment.payment_status }}</td>
+                                              <td>
+                                                 <a href="{{ appointment.meet_link }}" target="_blank">{{ appointment.meet_link }}</a>
+                                              </td>
+                                              <td>
+                                                  {{ appointment.date}}
+                                              </td>
+                                              <td>
+                                                    {{ appointment.time }}
+                                              </td>
+                                              <td>
+                                                    <a href="{% url 'view_patient_prescribe'  appointment.pk %}" class="btn btn-success">View Prescribe</a>
+                                              </td>
+                                              <td>
+                                                    <a href="{% url 'view_patient_test'  appointment.pk %}" class="btn btn-success">View Prescribe</a>
+                                              </td>
+                                        </tr>
+                                     {% endif %}
                                  {% endfor %}
                             </tbody>
                         </table>
                     </div>
                 </div>
+</div>
 
 
 <div class="modal fade" id="modal-employee">

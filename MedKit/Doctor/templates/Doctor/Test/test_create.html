@@ -2,7 +2,9 @@
 {% load widget_tweaks %}
 {% load static %}
 {% load crispy_forms_tags %}
+{% block javascript %}
 
+{% endblock javascript %}
 
 {% block content %}
 <br>
@@ -11,14 +13,12 @@
 <br>
 <br>
 <br>
-<hr>
-<h1>***PLZ Send Your Money This Number Or QR Code***</h1>
-<img src="">
-<h1>Bkash Number : 01744450651</h1>
+
+
 <hr>
 <form method="post">
     {% csrf_token %}
-    <h1 align="center">Payment Information</h1>
+    <h1 align="center">Create Test Information</h1>
     {{ form|crispy }}
     <br>
     <input  class="btn btn-info" type="submit" value="Submit">
