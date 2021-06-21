@@ -40,9 +40,9 @@ header part css start
     color: rgb(32, 25, 128);
     line-height: 60px;
 }
-.header .container .logo a:hover{
-    color: rgb(255, 255, 255);
-}
+/*.header .container .logo a:hover{
+    color: rgb(255, 255, 0);
+}*/
 .header .container .manu-bar{
     float: right;
 }
@@ -56,7 +56,7 @@ header part css start
     margin-left: 25px;
 }
 .header .container .manu-bar ul li a:hover{
-    color: rgb(252, 251, 255); 
+    color: rgb(255, 0, 0);
 }
 .banner{
     background-image: url('../images/banner.jpg');
@@ -187,7 +187,7 @@ header part css start
 ==================================*/
 .ser-details{
     text-align: center;
-    background-color: rgb(255, 255, 255);
+    background-color: rgb(255, 255, 0);
 }
 .ser-details .container .ser-row-1{
     padding-top: 60px;

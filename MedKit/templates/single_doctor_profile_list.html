@@ -13,25 +13,25 @@
                     <img src="{{ doctor.image.url }}" alt="">
                </div>
                <div class="text float-left">
-                    <h4>User Name : {{ doctor.username }} </h4>
-                    <h4>Name : {{ doctor.first_name }} {{ doctor.last_name }}</h4>
-                    <h3>Email : {{ doctor.email }}</h3>
+                    <h5>User Name : {{ doctor.username }} </h5>
+                    <h5>Name : {{ doctor.first_name }} {{ doctor.last_name }}</h5>
+                    <h5>Email : {{ doctor.email }}</h5>
                    <hr>
                     <h3>
-                       <h1>Category <br></h1><hr>
+                       <h5>Category <br></h5><hr>
                         {% for group in doctor.category.all %}
                             {{ group.name }}<br>
                         {% endfor%}
                     </h3>
                     <h2>
-                        <h1>Degree <br></h1><hr>
+                        <h5>Degree <br></h5><hr>
                         {% for group in doctor.degree.all %}
                              {{ group.degree }}<br>
                         {% endfor%}
                     </h2>
                    <br>
                    <hr>
-                   <h1>Check Up Price : 500 Taka</h1>
+                   <h3>Check Up Price : 500 Taka</h3>
                </div>
             </div>
             <div class="profile-body clearfix">

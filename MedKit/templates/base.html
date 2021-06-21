@@ -10,7 +10,7 @@
 </head>
 <body>
     <!-- preheader section html start -->
-    <section class="pre-header">
+    <!--<section class="pre-header">
         <div class="container">
             <div class="header-row">
                 <div class="left-icon">
@@ -26,8 +26,9 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> -->
     <!--header section html part start-->
+
     <section class="header">
         <div class="container">
             <div class="logo">
@@ -37,6 +38,8 @@
                 <ul>
                     <li><a href="{% url 'index' %}">Home</a></li>
                     <li><a href="{% url 'doctors_list' %}">Doctor</a></li>
+                    <li class="nav-item">
+
 
                     {% if user.is_authenticated and user.is_staff %}
 

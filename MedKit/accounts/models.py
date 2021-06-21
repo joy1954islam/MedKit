@@ -16,8 +16,8 @@ class Activation(models.Model):
 
 class User(AbstractUser):
     owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE,null=True,blank=True)
-    category = models.ManyToManyField(Category)
-    degree = models.ManyToManyField(Degree)
+    category = models.ManyToManyField(Category, null=True, blank=True)
+    degree = models.ManyToManyField(Degree, null=True, blank=True)
     is_doctor = models.BooleanField(default=False)
     is_patient = models.BooleanField(default=False)
     phone_number = models.CharField(max_length=12, null=True, blank=True)

@@ -32,7 +32,16 @@ User = get_user_model()
 
 
 def SuperAdminHome(request):
-    return render(request,'Receptionist/Home.html')
+    user = User.objects.all()
+    patient = user.filter(is_patient=True).count()
+    doctor = user.filter(is_doctor=True).count()
+    superuser = user.filter(is_superuser=True).count()
+    context = {
+        'doctor': doctor,
+        'patient': patient,
+        'superuser': superuser
+    }
+    return render(request,'Receptionist/Home.html',context)
 
 
 def SuperAdminProfile(request):
